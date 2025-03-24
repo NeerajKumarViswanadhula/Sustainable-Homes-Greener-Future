@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Home Improvement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        header {
+            background: #000910;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #333;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        nav a:hover {
+            background: #575757;
+        }
+        /*.container {
+            padding: 20px;
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }*/
+        section {
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #000910;
+            color: white;
+            margin-top: 20px;
+        }
+        .dark-mode {
+            background-color: #222;
+            color: #ddd;
+        }
+        .camera-container {
+            text-align: center;
+            padding: 0px;
+        }
+        #video {
+            width: 100%;
+            max-width: 500px;
+        }
+        #canvas {
+            display: none;
+        }
+        .quiz {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .quiz button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sustainable Home Improvement</h1>
+        <p>Eco-friendly living with Green Building & Design Solutions</p>
+    </header>
+    
+    <div class="container">
+        <section id="camera" class="camera-container">
+            <h2>Image Detection</h2>
+            <p>Use your camera to capture an image for eco-friendly home improvement insights.</p>
+            <video id="video" autoplay></video>
+            <br>
+            <button onclick="captureImage()">Capture Image</button>
+            <canvas id="canvas"></canvas>
+        </section>
+
+    </div>
+    
+    <footer>
+        <p>&copy; © 2025, Ecocean. All rights reserved | HTML,CSS,Js |. Crafted with care by NHUB</p>
+    </footer>
+    
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error("Error accessing camera: ", error);
+            });
+
+        function captureImage() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL('image/png');
+            console.log("Captured Image Data: ", imageData);
+            alert("Image captured! This can be processed for eco-friendly insights.");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        function checkAnswer(answer) {
+            let resultText = answer === 'A' ? "Correct! Bamboo is a sustainable material." : "Incorrect. Try again!";
+            document.getElementById('quiz-result').textContent = resultText;
+        }
+    </script>
+</body>
+</html>
